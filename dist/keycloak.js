@@ -51,7 +51,7 @@
             var configPromise = loadConfig(config);
 
             function processInit() {
-                var callback = parseCallback(window.location.href);
+                var callback = parseCallback(window.location.search);
 
                 if (callback) {
                     window.history.replaceState({}, null, callback.newUrl);
