@@ -691,6 +691,9 @@
                     return;
                 }
                 var data = JSON.parse(event.data);
+                if (!data.callbackId) {
+                    return;
+                }
                 var promise = loginIframe.callbackMap[data.callbackId];
                 delete loginIframe.callbackMap[data.callbackId];
 
