@@ -33,9 +33,12 @@
         };
 
         kc.init = function (initOptions) {
-            kc.authenticated = false;
-
-            if (window.Cordova) {
+            var forceDefaultAdapter = false;
+            if (initOptions && typeof initOptions.forceDefaultAdapter === 'boolean') {
+                forceDefaultAdapter = initOptions.forceDefaultAdapter;
+            }
+ 
+            if (window.Cordova && forceDefaultAdapter === false) {
                 adapter = loadAdapter('cordova');
             } else {
                 adapter = loadAdapter();
