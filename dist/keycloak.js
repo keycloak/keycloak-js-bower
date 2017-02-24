@@ -964,6 +964,13 @@
                                 }
                             }
                         });
+                        
+                        ref.addEventListener('exit', function(event) {
+                            if (!completed) {
+                                promise.setError(event);
+                                ref.close();
+                            }
+                        });
 
                         return promise.promise;
                     },
@@ -999,7 +1006,7 @@
                                 promise.setSuccess();
                             }
                         });
-
+                        
                         return promise.promise;
                     },
 
