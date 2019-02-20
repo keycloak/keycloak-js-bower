@@ -41,7 +41,8 @@
         }
 
         var useNonce = true;
-        
+        var urlParams = '';
+
         kc.init = function (initOptions) {
             kc.authenticated = false;
 
@@ -68,6 +69,10 @@
 
                 if (typeof initOptions.checkLoginIframe !== 'undefined') {
                     loginIframe.enable = initOptions.checkLoginIframe;
+                }
+
+                if (typeof initOptions.urlParams !== 'undefined') {
+                    urlParams = generateParams(initOptions.urlParams);
                 }
 
                 if (initOptions.checkLoginIframeInterval) {
@@ -282,10 +287,12 @@
             if (options && options.locale) {
                 url += '&ui_locales=' + encodeURIComponent(options.locale);
             }
-            
+
             if (options && options.kcLocale) {
                 url += '&kc_locale=' + encodeURIComponent(options.kcLocale);
             }
+
+            url += urlParams;
 
             return url;
         }
@@ -321,6 +328,7 @@
                 + '/account'
                 + '?referrer=' + encodeURIComponent(kc.clientId)
                 + '&referrer_uri=' + encodeURIComponent(adapter.redirectUri(options));
+                url += urlParams;
             }
             return url;
         }
@@ -509,6 +517,16 @@
                     kc.login();
                 }
             }
+        }
+
+        function generateParams(params) {
+            var str = '';
+            for (var param in params) {
+                if (params.hasOwnProperty(param)) {
+                    str += '&' + param + '=' + encodeURIComponent(params[param]);
+                }
+            }
+            return str;
         }
 
         function getRealmUrl() {

@@ -43,13 +43,13 @@ declare namespace Keycloak {
 
 		/**
 		 * Allows to use different adapter:
-		 * 
+		 *
 		 * - {string} default - using browser api for redirects
-		 * - {string} cordova - using cordova plugins 
+		 * - {string} cordova - using cordova plugins
 		 * - {function} - allows to provide custom function as adapter.
 		 */
 		adapter?: KeycloakAdapterName;
-		
+
 		/**
 		 * Specifies an action to do on load.
 		 */
@@ -76,6 +76,11 @@ declare namespace Keycloak {
 		 * seconds (only together with `token` or `refreshToken`).
 		 */
 		timeSkew?: number;
+
+		/**
+		 * Set the additional GET parameters.
+		 */
+		urlParams?: { [index: string]: string }
 
 		/**
 		 * Set to enable/disable monitoring login state.
@@ -154,7 +159,7 @@ declare namespace Keycloak {
                  * of the OIDC 1.0 specification.
 		 */
 		locale?: string;
-                
+
                 /**
 		 * Specifies the desired Keycloak locale for the UI.  This differs from
                  * the locale param in that it tells the Keycloak server to set a cookie and update
